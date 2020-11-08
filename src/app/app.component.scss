@@ -1,9 +1,14 @@
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
+$grayscuro: #303030;
+$pink: #a31544;
+.bg{
+
+  background-color: $grayscuro;
+  height: 100%;
+  max-width: 100%;
+  min-width: 100%;
   
-  .example-full-width {
-    width: 100%;
+  .text-pink{
+    color:$pink
   }
+
+}

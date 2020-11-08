@@ -1,21 +1,58 @@
+<div class="bg">
+  <div class="container">
 
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <mat-label>Message</mat-label>
-    <input matInput #message maxlength="256" placeholder="Ex. I need help with...">
-    <mat-hint align="start"><strong>Don't disclose personal info</strong> </mat-hint>
-    <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
-  </mat-form-field> 
-</form>
+    <div class="row">
+      <mat-toolbar>
+        <mat-toolbar-row>
+          <mat-icon>home</mat-icon>
+          <span class="ml-4">GTTwopill</span>
+          <span class="example-spacer"></span>
+          <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+          </button>
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </div>
 
-<input type="text" name="" id="" [(ngModel)]="numeroFermata">
-<button type="submit" (click)="send(numeroFermata)">Submit</button>
 
-<h1>Numero fermata: {{ numeroFermata }} </h1>
+    <div class="row mt-4">
+      <div class="col p-0">
+        <form class="example-form">
+          <mat-form-field class="example-full-width w-100">
+            <mat-label>Fermata n°</mat-label>
+            <input [(ngModel)]="numeroFermata" [ngModelOptions]="{standalone: true}" matInput #message maxlength="256"
+              placeholder="Ex. 597">
+            <mat-hint align="start">
+              <div class="text-pink">Speriamo arrivi presto...</div>
+            </mat-hint>
+            <mat-hint align="end">{{message.value.length}} / 3</mat-hint>
+          </mat-form-field>
+        </form>
+      </div>
+    </div>
 
-<div *ngFor="let value of posts, let i = index">
-  <div *ngFor="let item of value">
-    <h5 class="">Linea: </h5> {{ item.line }}
-    <h5>Ora: </h5> {{ item.hour }}
+    <div class="row mt-4">
+      <button class="btn-send" mat-raised-button color="accent" (click)="send(numeroFermata)">Vedi</button>
+    </div>
+
+    <div class="row mt-5">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8  w-100" *ngIf="dataSource != null">
+
+        <!-- Linea Column -->
+        <ng-container matColumnDef="_line">
+          <th mat-header-cell *matHeaderCellDef> Linea </th>
+          <td mat-cell *matCellDef="let element"> {{element.line}} </td>
+        </ng-container>
+
+        <!-- Orario Column -->
+        <ng-container matColumnDef="_hour">
+          <th mat-header-cell *matHeaderCellDef> Orario </th>
+          <td mat-cell *matCellDef="let element"> {{element.hour}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+
   </div>
 </div>
